@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Column, Model, Table, DataType } from 'sequelize-typescript';
 
 @Table({
@@ -5,6 +6,7 @@ import { Column, Model, Table, DataType } from 'sequelize-typescript';
   timestamps: false,
 })
 export class Book extends Model<Book> {
+  @ApiProperty()
   @Column({
     type: DataType.STRING,
     primaryKey: true,
@@ -12,18 +14,21 @@ export class Book extends Model<Book> {
   })
   code: string;
 
+  @ApiProperty()
   @Column({
     type: DataType.STRING,
     allowNull: true,
   })
   title: string;
 
+  @ApiProperty()
   @Column({
     type: DataType.STRING,
     allowNull: true,
   })
   author: string;
 
+  @ApiProperty()
   @Column({
     type: DataType.INTEGER,
     allowNull: true,

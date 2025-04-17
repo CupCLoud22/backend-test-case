@@ -22,7 +22,7 @@ import { ConfigModule } from '@nestjs/config';
       timezone: 'Asia/Jakarta',
       models: [Book, Member],
       autoLoadModels: true,
-      synchronize: false, // Hindari override tabel di database
+      synchronize: false,
     }),
     BookModule,
     MemberModule,
