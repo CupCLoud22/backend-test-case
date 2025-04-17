@@ -9,9 +9,17 @@ export class BorrowBookDto {
 }
 
 export class ReturnBookDto {
-  @ApiProperty()
+  @ApiProperty({ example: 'M001', description: 'Member code' })
   memberCode: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'JK-45', description: 'Book code' })
   bookCode: string;
+}
+
+export class ReturnResponseDto {
+  @ApiProperty({
+    example: 'Book returned successfully',
+    description: 'Result message',
+  })
+  message: string;
 }

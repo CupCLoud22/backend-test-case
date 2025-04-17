@@ -1,4 +1,12 @@
-import { Controller, Post, Body, Get, Param } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Param,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { BorrowingService } from './borrowing.service';
 import { Borrowing } from './borrowing.model';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
@@ -33,9 +41,13 @@ export class BorrowingController {
   async returnBook(
     @Body() returnBookDto: ReturnBookDto,
   ): Promise<{ message: string }> {
-    return await this.borrowingService.returnBook(
-      returnBookDto.memberCode,
-      returnBookDto.bookCode,
-    );
+    try {
+      return await this.borrowingService.returnBook(
+        returnBookDto.memberCode,
+        returnBookDto.bookCode,
+      );
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+    }
   }
 }

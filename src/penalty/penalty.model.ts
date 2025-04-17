@@ -5,6 +5,7 @@ import {
   Table,
   DataType,
   ForeignKey,
+  BelongsTo,
 } from 'sequelize-typescript';
 import { Member } from '../member/member.model';
 
@@ -14,15 +15,13 @@ import { Member } from '../member/member.model';
   updatedAt: false,
 })
 export class Penalty extends Model<Penalty> {
-  //   @ApiProperty()
-  //   @Column({
-  //     type: DataType.INTEGER,
-  //     primaryKey: true,
-  //     autoIncrement: true,
-  //   })
-  //   id: number;
+  // @Column({
+  //   type: DataType.INTEGER,
+  //   primaryKey: true,
+  //   autoIncrement: true,
+  // })
+  // id: number;
 
-  @ApiProperty()
   @ForeignKey(() => Member)
   @Column({
     type: DataType.STRING,
@@ -30,7 +29,9 @@ export class Penalty extends Model<Penalty> {
   })
   memberCode: string;
 
-  @ApiProperty()
+  @BelongsTo(() => Member)
+  member: Member;
+
   @Column({
     type: DataType.DATE,
     allowNull: false,
@@ -38,7 +39,6 @@ export class Penalty extends Model<Penalty> {
   })
   startAt: Date;
 
-  @ApiProperty()
   @Column({
     type: DataType.DATE,
     allowNull: false,

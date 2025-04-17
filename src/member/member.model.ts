@@ -23,6 +23,13 @@ export class Member extends Model<Member> {
   })
   name: string;
 
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+    defaultValue: 0,
+  })
+  booksBeingBorrowed: number;
+
   @HasMany(() => Borrowing)
   borrowings: Borrowing[];
 
