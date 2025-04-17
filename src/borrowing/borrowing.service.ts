@@ -47,6 +47,17 @@ export class BorrowingService {
       );
     }
 
+    // Check if member has more than 2 active borrowings
+    const activeBorrowings = await this.borrowingModel.count({
+      where: {
+        memberCode,
+        returnedAt: null,
+      },
+    });
+    if (activeBorrowings >= 2) {
+      throw new BadRequestException('Member cannot borrow more than 2 books');
+    }
+
     // Create borrowing record
     const borrowing = await this.borrowingModel.create({
       bookCode,
