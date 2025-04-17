@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('Library API')
+    .setTitle('Backend Test Case')
     .setDescription('API documentation for Books and Members')
     .setVersion('1.0')
     .addTag('books')

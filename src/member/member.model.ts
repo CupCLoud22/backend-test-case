@@ -1,5 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Model, Table, DataType } from 'sequelize-typescript';
+import { Column, Model, Table, DataType, HasMany } from 'sequelize-typescript';
+import { Borrowing } from '../borrowing/borrowing.model';
+import { Penalty } from '../penalty/penalty.model';
 
 @Table({
   tableName: 'members',
@@ -20,4 +22,10 @@ export class Member extends Model<Member> {
     allowNull: true,
   })
   name: string;
+
+  @HasMany(() => Borrowing)
+  borrowings: Borrowing[];
+
+  @HasMany(() => Penalty)
+  penalties: Penalty[];
 }

@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Model, Table, DataType } from 'sequelize-typescript';
+import { Column, Model, Table, DataType, HasMany } from 'sequelize-typescript';
+import { Borrowing } from '../borrowing/borrowing.model';
 
 @Table({
   tableName: 'books',
@@ -34,4 +35,7 @@ export class Book extends Model<Book> {
     allowNull: true,
   })
   stock: number;
+
+  @HasMany(() => Borrowing)
+  borrowings: Borrowing[];
 }
