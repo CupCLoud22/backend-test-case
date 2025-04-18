@@ -68,7 +68,13 @@ export class BorrowingService {
     }
 
     // Check if member has more than 2 active borrowings
-    if (member.booksBeingBorrowed >= 2) {
+    const activeBorrowings = await this.borrowingModel.count({
+      where: {
+        memberCode,
+        returnedAt: null,
+      },
+    });
+    if (activeBorrowings >= 2) {
       throw new BadRequestException('Member cannot borrow more than 2 books');
     }
 
