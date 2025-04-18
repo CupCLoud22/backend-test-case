@@ -1,0 +1,39 @@
+CREATE TABLE members (
+    code VARCHAR(10) PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    booksBeingBorrowed INTEGER NOT NULL CHECK (stock >= 0)
+);
+
+CREATE TABLE books (
+    code VARCHAR(20) PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    author VARCHAR(100) NOT NULL,
+    stock INTEGER NOT NULL CHECK (stock >= 0)
+);
+
+CREATE TABLE borrowings (
+  id SERIAL PRIMARY KEY,
+  member_code VARCHAR NOT NULL,
+  book_code VARCHAR NOT NULL,
+  borrowed_at TIMESTAMP NOT NULL,
+  returned_at TIMESTAMP,
+  dueAt TIMESTAMP NOT NULL,
+  createdAt TIMESTAMP NOT NULL,
+  isDeleted BOOLEAN,
+  FOREIGN KEY (member_code) REFERENCES members(code),
+  FOREIGN KEY (book_code) REFERENCES books(code)
+);
+
+-- Insert members
+INSERT INTO members (code, name) VALUES
+('M001', 'Angga'),
+('M002', 'Ferry'),
+('M003', 'Putri');
+
+-- Insert books
+INSERT INTO books (code, title, author, stock) VALUES
+('JK-45', 'Harry Potter', 'J.K Rowling', 1),
+('SHR-1', 'A Study in Scarlet', 'Arthur Conan Doyle', 1),
+('TW-11', 'Twilight', 'Stephenie Meyer', 1),
+('HOB-83', 'The Hobbit, or There and Back Again', 'J.R.R. Tolkien', 1),
+('NRN-7', 'The Lion, the Witch and the Wardrobe', 'C.S. Lewis', 1);
